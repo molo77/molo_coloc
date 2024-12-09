@@ -1,10 +1,11 @@
 import NextAuth from "next-auth";
-import { cache } from "react";
+import { authOptions } from "./config"; // Importez vos options NextAuth configurées.
 
-import { authConfig } from "./config";
+// Initialisation de NextAuth avec les options fournies.
+const authInstance = NextAuth(authOptions); // Instance de NextAuth.
 
-const { auth: uncachedAuth, handlers, signIn, signOut } = NextAuth(authConfig);
+// Extraction des fonctionnalités et handlers de NextAuth.
+const { handlers, signIn, signOut } = authInstance;
 
-const auth = cache(uncachedAuth);
-
-export { auth, handlers, signIn, signOut };
+// Export des fonctionnalités d'authentification.
+export { authInstance as auth, handlers, signIn, signOut };
